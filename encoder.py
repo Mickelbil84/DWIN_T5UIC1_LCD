@@ -65,4 +65,5 @@ class Encoder:
         self.state = newState
 
     def getValue(self):
+        print("Encoder value", self.value)
         return self.value
