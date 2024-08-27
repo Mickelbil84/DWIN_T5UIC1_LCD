@@ -308,8 +308,8 @@ class DWIN_LCD:
 		self.encoder = Encoder(encoder_pins[0], encoder_pins[1])
 		self.button_pin = button_pin
 		GPIO.setup(self.button_pin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
-		GPIO.add_event_detect(self.button_pin, GPIO.BOTH, callback=lambda val: self.encoder_has_data(val))
-		self.encoder.callback = lambda val: self.encoder_has_data(val)
+		GPIO.add_event_detect(self.button_pin, GPIO.BOTH, callback=lambda: self.encoder_has_data())
+		self.encoder.callback = lambda: self.encoder_has_data()
 		self.EncodeLast = 0
 		self.EncodeMS = current_milli_time() + self.ENCODER_WAIT
 		self.EncodeEnter = current_milli_time() + self.ENCODER_WAIT_ENTER
@@ -2249,7 +2249,7 @@ class DWIN_LCD:
 			self.Draw_Status_Area(update)
 		self.lcd.UpdateLCD()
 
-	def encoder_has_data(self, val):
+	def encoder_has_data(self):
 		if self.checkkey == self.MainMenu:
 			self.HMI_MainMenu()
 		elif self.checkkey == self.SelectFile:
