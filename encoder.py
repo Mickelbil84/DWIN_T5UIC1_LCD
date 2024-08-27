@@ -22,6 +22,7 @@ class Encoder:
         p1 = GPIO.input(self.leftPin)
         p2 = GPIO.input(self.rightPin)
         newState = "{}{}".format(p1, p2)
+        print(newState)
 
         if self.state == "00": # Resting position
             if newState == "01": # Turned right 1
