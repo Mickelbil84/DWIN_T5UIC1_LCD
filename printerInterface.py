@@ -337,10 +337,10 @@ class PrinterData:
 	# ------------- OctoPrint Function ----------
 
 	def getREST(self, path):
-		print("REST:", self.op.base_address + path)
+		# print("REST:", self.op.base_address + path)
 		r = self.op.s.get(self.op.base_address + path)
 		d = r.content.decode('utf-8')
-		print("RESULT:", d)
+		# print("RESULT:", d)
 		try:
 			return json.loads(d)
 		except JSONDecodeError:
