@@ -375,27 +375,30 @@ class PrinterData:
 		self.state = self.getREST('/api/printer')
 		Update = False
 		if self.state:
-			if "temperature" in self.state:
-				print(self.state["temperature"])
-				if self.state["temperature"]["bed"]["actual"]:
-					if self.thermalManager['temp_bed']['celsius'] != int(self.state["temperature"]["bed"]["actual"]):
-						self.thermalManager['temp_bed']['celsius'] = int(self.state["temperature"]["bed"]["actual"])
-						Update = True
+			print(self.state["temperature"])
+			try:
+				if "temperature" in self.state:
+					if self.state["temperature"]["bed"]["actual"]:
+						if self.thermalManager['temp_bed']['celsius'] != int(self.state["temperature"]["bed"]["actual"]):
+							self.thermalManager['temp_bed']['celsius'] = int(self.state["temperature"]["bed"]["actual"])
+							Update = True
 
-				if self.state["temperature"]["bed"]["target"]:
-					if self.thermalManager['temp_bed']['target'] != int(self.state["temperature"]["bed"]["target"]):
-						self.thermalManager['temp_bed']['target'] = int(self.state["temperature"]["bed"]["target"])
-						Update = True
+					if self.state["temperature"]["bed"]["target"]:
+						if self.thermalManager['temp_bed']['target'] != int(self.state["temperature"]["bed"]["target"]):
+							self.thermalManager['temp_bed']['target'] = int(self.state["temperature"]["bed"]["target"])
+							Update = True
 
-				if self.state["temperature"]["tool0"]["target"]:
-					if self.thermalManager['temp_hotend'][0]['target'] != int(self.state["temperature"]["tool0"]["target"]):
-						self.thermalManager['temp_hotend'][0]['target'] = int(self.state["temperature"]["tool0"]["target"])
-						Update = True
+					if self.state["temperature"]["tool0"]["target"]:
+						if self.thermalManager['temp_hotend'][0]['target'] != int(self.state["temperature"]["tool0"]["target"]):
+							self.thermalManager['temp_hotend'][0]['target'] = int(self.state["temperature"]["tool0"]["target"])
+							Update = True
 
-				if self.state["temperature"]["tool0"]["actual"]:
-					if self.thermalManager['temp_hotend'][0]['celsius'] != int(self.state["temperature"]["tool0"]["actual"]):
-						self.thermalManager['temp_hotend'][0]['celsius'] = int(self.state["temperature"]["tool0"]["actual"])
-						Update = True
+					if self.state["temperature"]["tool0"]["actual"]:
+						if self.thermalManager['temp_hotend'][0]['celsius'] != int(self.state["temperature"]["tool0"]["actual"]):
+							self.thermalManager['temp_hotend'][0]['celsius'] = int(self.state["temperature"]["tool0"]["actual"])
+							Update = True
+			except KeyError as e:
+				print(e)
 		self.job_Info = self.getREST('/api/job')
 		if self.job_Info:
 			self.file_name = self.job_Info['job']['file']['name']
