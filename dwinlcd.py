@@ -1925,16 +1925,16 @@ class DWIN_LCD:
 		self.checkkey = self.MainMenu
 		self.Clear_Main_Window()
 
-		self.lcd.Frame_AreaCopy(1, 0, 2, 39, 12, 14, 9)
-		self.lcd.ICON_Show(self.ICON, self.ICON_LOGO, 71, 52)
+		# self.lcd.Frame_AreaCopy(1, 0, 2, 39, 12, 14, 9)
+		# self.lcd.ICON_Show(self.ICON, self.ICON_LOGO, 71, 52)
 
-		self.ICON_Print()
-		self.ICON_Prepare()
-		self.ICON_Control()
-		if self.pd.HAS_ONESTEP_LEVELING:
-			self.ICON_Leveling(self.select_page.now == 3)
-		else:
-			self.ICON_StartInfo(self.select_page.now == 3)
+		# self.ICON_Print()
+		# self.ICON_Prepare()
+		# self.ICON_Control()
+		# if self.pd.HAS_ONESTEP_LEVELING:
+			# self.ICON_Leveling(self.select_page.now == 3)
+		# else:
+			# self.ICON_StartInfo(self.select_page.now == 3)
 
 	def Goto_PrintProcess(self):
 		self.checkkey = self.PrintProcess
