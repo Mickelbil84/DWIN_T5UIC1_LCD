@@ -11,29 +11,18 @@ https://github.com/arksine/moonraker
 
 ## Setup:
 
-### [Disable Linux serial console](https://www.raspberrypi.org/documentation/configuration/uart.md)
-  By default, the primary UART is assigned to the Linux console. If you wish to use the primary UART for other purposes, you must reconfigure Raspberry Pi OS. This can be done by using raspi-config:
+### Enable UART GPIO on LePotato
 
-  * Start raspi-config: `sudo raspi-config.`
-  * Select option 3 - Interface Options.
-  * Select option P6 - Serial Port.
-  * At the prompt Would you like a login shell to be accessible over serial? answer 'No'
-  * At the prompt Would you like the serial port hardware to be enabled? answer 'Yes'
-  * Exit raspi-config and reboot the Pi for changes to take effect.
-  
-  For full instructions on how to use Device Tree overlays see [this page](https://www.raspberrypi.org/documentation/configuration/device-tree.md). 
-  
-  In brief, add a line to the `/boot/config.txt` file to apply a Device Tree overlay.
-    
-    dtoverlay=disable-bt
+```
+git clone https://github.com/libre-computer-project/libretech-wiring-tool.git
+cd libretech-wiring-tool
+sudo make
+sudo ldto enable uart-a
+```
 
 ### [Enabling Klipper's API socket](https://www.klipper3d.org/API_Server.html)
-  By default, the Klipper's API socket is not enabled. In order to use the API server, the file /etc/default/klipper need to be updated form
 
-    KLIPPY_ARGS="/home/pi/klipper/klippy/klippy.py /home/pi/printer.cfg -l /tmp/klippy.log"
-To:
-
-    KLIPPY_ARGS="/home/pi/klipper/klippy/klippy.py /home/pi/printer.cfg -a /tmp/klippy_uds -l /tmp/klippy.log"
+By default, the Klipper's API socket is not enabled. In order to use the API server, adding `-a /tmp/klippy_uds` to the correct line in `systemd/system/klipper.service` [TODO]
 
 ### Library requirements 
 
@@ -43,18 +32,20 @@ To:
 
   `sudo pip3 install multitimer`
 
-  `git clone https://github.com/odwdinc/DWIN_T5UIC1_LCD.git`
+  `sudo pip3 install LePotatoPi.GPIO gpiod==1.5.3`
+
+  `git clone https://github.com/Mickelbil84/DWIN_T5UIC1_LCD.git`
 
 
 ### Wire the display 
-  * Display <-> Raspberry Pi GPIO BCM
-  * Rx  =   GPIO14  (Tx)
-  * Tx  =   GPIO15  (Rx)
-  * Ent =   GPIO13
-  * A   =   GPIO19
+  * Display <-> LePotato GPIO BCM
+  * Rx  =   GPIO12  (Tx)
+  * Tx  =   GPIO13  (Rx)
+  * Ent =   GPIO6
+  * A   =   GPIO18
   * B   =   GPIO26
-  * Vcc =   2   (5v)
-  * Gnd =   6   (GND)
+  * Vcc =   (5v)
+  * Gnd =   (GND)
 
 ### Run The Code
 
@@ -65,9 +56,9 @@ Make new file run.py and add
 #!/usr/bin/env python3
 from dwinlcd import DWIN_LCD
 
-encoder_Pins = (26, 19)
-button_Pin = 13
-LCD_COM_Port = '/dev/ttyAMA0'
+encoder_Pins = (26, 18)
+button_Pin = 6
+LCD_COM_Port = '/dev/ttyAML6'
 API_Key = 'XXXXXX'
 
 DWINLCD = DWIN_LCD(
