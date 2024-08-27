@@ -354,6 +354,7 @@ class PrinterData:
 			return
 		self.update_variable()
 		ppp = self.getREST('/api/printerprofiles/_default')
+		print(ppp)
 		self.SHORT_BUILD_VERSION = ppp['model']
 		self.MACHINE_SIZE = "{}x{}x{}".format(
 			int(ppp['volume']['depth']),
@@ -375,7 +376,7 @@ class PrinterData:
 		self.state = self.getREST('/api/printer')
 		Update = False
 		if self.state:
-			print(self.state["temperature"])
+			print(self.state)
 			try:
 				if "temperature" in self.state:
 					if self.state["temperature"]["bed"]["actual"]:
