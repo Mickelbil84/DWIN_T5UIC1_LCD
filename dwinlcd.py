@@ -3,7 +3,8 @@ import multitimer
 import atexit
 
 from encoder import Encoder
-from RPi import GPIO
+#from RPi import GPIO
+import LePotatoPi.GPIO.GPIO as GPIO
 
 from printerInterface import PrinterData
 from DWIN_Screen import T5UIC1_LCD
