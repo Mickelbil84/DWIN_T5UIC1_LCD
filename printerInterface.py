@@ -376,6 +376,7 @@ class PrinterData:
 		Update = False
 		if self.state:
 			if "temperature" in self.state:
+				print(self.state["temperature"])
 				if self.state["temperature"]["bed"]["actual"]:
 					if self.thermalManager['temp_bed']['celsius'] != int(self.state["temperature"]["bed"]["actual"]):
 						self.thermalManager['temp_bed']['celsius'] = int(self.state["temperature"]["bed"]["actual"])

@@ -51,6 +51,7 @@ By default, the Klipper's API socket is not enabled. In order to use the API ser
 
 Enter the downloaded DWIN_T5UIC1_LCD folder.
 Make new file run.py and add
+(you can also run `cp run.py.txt run.py` and insert the API_Key).
 
 ```python
 #!/usr/bin/env python3
