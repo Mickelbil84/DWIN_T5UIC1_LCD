@@ -388,6 +388,7 @@ class PrinterData:
 
 	def update_variable(self):
 		query = '/printer/objects/query?extruder&heater_bed&gcode_move&fan'
+		print(self.getREST(query))
 		data = self.getREST(query)['result']['status']
 		gcm = data['gcode_move']
 		z_offset = gcm['homing_origin'][2] #z offset
