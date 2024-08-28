@@ -309,8 +309,8 @@ class DWIN_LCD:
 		self.encoder = Encoder(encoder_pins[0], encoder_pins[1])
 		self.button_pin = button_pin
 		GPIO.setup(self.button_pin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
-		GPIO.add_event_detect(self.button_pin, GPIO.BOTH, callback=lambda: self.encoder_has_data())
-		# self.encoder.callback = lambda: self.encoder_has_data()
+		GPIO.add_event_detect(self.button_pin, GPIO.BOTH, callback=self.encoder_has_data)
+		self.encoder.callback = self.encoder_has_data
 		self.EncodeLast = 0
 		self.EncodeMS = current_milli_time() + self.ENCODER_WAIT
 		self.EncodeEnter = current_milli_time() + self.ENCODER_WAIT_ENTER
