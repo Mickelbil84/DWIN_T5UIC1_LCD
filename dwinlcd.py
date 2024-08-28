@@ -356,11 +356,11 @@ class DWIN_LCD:
 				10, 50,
 				mesg
 			)
-		for t in range(0, 100, 2):
+		for t in range(0, 100, 20):
 			self.lcd.ICON_Show(self.ICON, self.ICON_Bar, 15, 260)
 			self.lcd.Draw_Rectangle(1, self.lcd.Color_Bg_Black, 15 + t * 242 / 100, 260, 257, 280)
 			self.lcd.UpdateLCD()
-			time.sleep(.0020)
+			time.sleep(.020)
 
 	def HMI_Init(self):
 		# HMI_SDCardInit()
