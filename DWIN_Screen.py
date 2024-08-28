@@ -93,7 +93,7 @@ class T5UIC1_LCD:
 		self.MYSERIAL1.write(self.DWIN_BufTail)
 
 		self.DWIN_SendBuf = self.FHONE
-		time.sleep(0.001)
+		time.sleep(0.01)
 
 	def Read(self, lend=1):
 		bit = self.bus.read_i2c_block_data(self.address, 0, lend)
