@@ -319,7 +319,7 @@ class DWIN_LCD:
 		self.lcd = T5UIC1_LCD(USARTx)
 		self.checkkey = self.MainMenu
 		self.pd = PrinterData(octoPrint_API_Key)
-		self.timer = multitimer.MultiTimer(interval=2, function=self.EachMomentUpdate)
+		self.timer = multitimer.MultiTimer(interval=1, function=self.EachMomentUpdate)
 		self.HMI_ShowBoot()
 		print("Boot looks good")
 		print("Testing Web-services")
@@ -337,7 +337,7 @@ class DWIN_LCD:
 		self.lcd.Frame_SetDir(1)
 		self.lcd.UpdateLCD()
 		self.timer.stop()
-		GPIO.remove_event_detect(self.button_pin)
+		# GPIO.remove_event_detect(self.button_pin)
 
 	def MBASE(self, L):
 		return 49 + self.MLINE * L
