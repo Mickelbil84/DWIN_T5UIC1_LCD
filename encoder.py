@@ -22,8 +22,7 @@ class Encoder:
         p1 = GPIO.input(self.leftPin)
         p2 = GPIO.input(self.rightPin)
         newState = "{}{}".format(p1, p2)
-        print(newState)
-
+        
         if self.state == "00": # Resting position
             if newState == "01": # Turned right 1
                 self.direction = "R"
@@ -37,7 +36,7 @@ class Encoder:
                 if self.direction == "L":
                     self.value = self.value - 1
                     if self.callback is not None:
-                        self.callback(self.value)
+                        self.callback()
 
         elif self.state == "10": # R3 or L1
             if newState == "11": # Turned left 1
@@ -46,7 +45,7 @@ class Encoder:
                 if self.direction == "R":
                     self.value = self.value + 1
                     if self.callback is not None:
-                        self.callback(self.value)
+                        self.callback()
 
         else: # self.state == "11"
             if newState == "01": # Turned left 1
@@ -57,11 +56,11 @@ class Encoder:
                 if self.direction == "L":
                     self.value = self.value - 1
                     if self.callback is not None:
-                        self.callback(self.value)
+                        self.callback()
                 elif self.direction == "R":
                     self.value = self.value + 1
                     if self.callback is not None:
-                        self.callback(self.value)
+                        self.callback()
                 
         self.state = newState
 
