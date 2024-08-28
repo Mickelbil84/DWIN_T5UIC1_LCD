@@ -1972,6 +1972,7 @@ class DWIN_LCD:
 		self.lcd.Draw_Rectangle(1, self.lcd.Color_Bg_Black, 0, 31, self.lcd.DWIN_WIDTH, self.STATUS_Y)
 
 	def Clear_Main_Window(self):
+		self.lcd.Frame_Clear(0)
 		self.Clear_Title_Bar()
 		self.Clear_Menu_Area()
 		time.sleep(0.02)
