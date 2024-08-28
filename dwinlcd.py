@@ -2251,6 +2251,7 @@ class DWIN_LCD:
 		self.lcd.UpdateLCD()
 
 	def encoder_has_data(self):
+		print("Button press!")
 		if self.checkkey == self.MainMenu:
 			self.HMI_MainMenu()
 		elif self.checkkey == self.SelectFile:
