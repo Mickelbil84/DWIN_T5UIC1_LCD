@@ -1,5 +1,7 @@
 # DWIN_T5UIC1_LCD - LePotato Fork
 
+Based also on tweaks by SuperPi911 & bustedlogic
+
 ## Python class for the Ender 3 V2 LCD runing klipper3d with Moonraker 
 
 https://www.klipper3d.org

@@ -253,25 +253,26 @@ class PrinterData:
 		self.op = MoonrakerSocket(URL, 80, API_Key)
 		self.status = None
 		print(self.op.base_address)
-		# self.ks = KlippySocket('/tmp/klippy_uds', callback=self.klippy_callback)
-		# subscribe = {
-		# 	"id": 4001,
-		# 	"method": "objects/subscribe",
-		# 	"params": {
-		# 		"objects": {
-		# 			"toolhead": [
-		# 				"position"
-		# 			]
-		# 		},
-		# 		"response_template": {}
-		# 	}
-		# }
-		# self.klippy_z_offset = '{"id": 4002, "method": "objects/query", "params": {"objects": {"configfile": ["config"]}}}'
-		# self.klippy_home = '{"id": 4003, "method": "objects/query", "params": {"objects": {"toolhead": ["homed_axes"]}}}'
+		# Thanks to @SuperPi911
+		self.ks = KlippySocket('/home/pi/printer_data/comms/klippy.sock', callback=self.klippy_callback)
+		subscribe = {
+			"id": 4001,
+			"method": "objects/subscribe",
+			"params": {
+				"objects": {
+					"toolhead": [
+						"position"
+					]
+				},
+				"response_template": {}
+			}
+		}
+		self.klippy_z_offset = '{"id": 4002, "method": "objects/query", "params": {"objects": {"configfile": ["config"]}}}'
+		self.klippy_home = '{"id": 4003, "method": "objects/query", "params": {"objects": {"toolhead": ["homed_axes"]}}}'
 
-		# self.ks.queue_line(json.dumps(subscribe))
-		# self.ks.queue_line(self.klippy_z_offset)
-		# self.ks.queue_line(self.klippy_home)
+		self.ks.queue_line(json.dumps(subscribe))
+		self.ks.queue_line(self.klippy_z_offset)
+		self.ks.queue_line(self.klippy_home)
 
 		self.event_loop = asyncio.new_event_loop()
 		threading.Thread(target=self.event_loop.run_forever, daemon=True).start()
