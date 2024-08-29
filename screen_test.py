@@ -5,7 +5,7 @@ from DWIN_Screen import T5UIC1_LCD
 
 LCD_COM_Port = '/dev/ttyAML6'
 
-FPS = 30
+FPS = 5
 
 if __name__ == "__main__":
     lcd = T5UIC1_LCD(LCD_COM_Port)
