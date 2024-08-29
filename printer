@@ -1,0 +1,1 @@
+{"temperature": {}, "state": {"text": "Offline", "flags": {"operational": false, "paused": false, "printing": false, "cancelling": false, "pausing": false, "error": false, "ready": false, "closedOrError": true}}}
