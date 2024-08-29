@@ -12,8 +12,8 @@ if __name__ == "__main__":
         date_time = time.strftime("%Y-%m-%d %H:%M:%S")
 
         # Clear screen
-        lcd.Frame_Clear(0)
-        lcd.Draw_String(True, False, 14, 255, 0, 10, 10, date_time)
+        lcd.Frame_Clear(lcd.Color_Bg_Black)
+        lcd.Draw_String(True, False, lcd.font14x28, lcd.Color_White, 0, 10, 10, date_time)
         lcd.UpdateLCD()
 
         time.sleep(1 / 60)
