@@ -1,7 +1,7 @@
 from icons import *
 from DWIN_Screen import T5UIC1_LCD
 
-BUSY_DELAY = 0.1
+BUSY_DELAY = 0.01
 
 class Screen_Base(object):
     def __init__(self, lcd: T5UIC1_LCD, title: str):

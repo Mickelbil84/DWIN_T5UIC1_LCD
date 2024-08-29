@@ -1,6 +1,7 @@
 import time
 
 from icons import *
+from events import *
 from DWIN_Screen import T5UIC1_LCD
 from screens.screen_base import Screen_Base, BUSY_DELAY
 
@@ -8,6 +9,7 @@ class Screen_MainMenu(Screen_Base):
     def __init__(self, lcd: T5UIC1_LCD):
         self.activeIcon = "print"
         self.icons = ["print", "prepare", "control", "info"]
+        self.icon_callbacks = [self._icon_print, self._icon_prepare, self._icon_control, self._icon_info]
 
         Screen_Base.__init__(self, lcd, "Home")
     
@@ -17,25 +19,32 @@ class Screen_MainMenu(Screen_Base):
         self._icon_control()
         self._icon_info()
 
-    def handle_input(self, state):
-        if state == 1:
+    def handle_input(self, event):
+        if event == EVENT_ROTARY_CW:
             self._change_active_icon(1)
-        if state == 2:
+        elif event == EVENT_ROTARY_CCW:
             self._change_active_icon(-1)
 
     # d is +-1 (direction of change)
     def _change_active_icon(self, d: int):
-        print("change", d)
         self.busy = True
         curr = self.icons.index(self.activeIcon)
-        idx = (curr + d) % len(self.icons)
+        idx = curr + d
+        if idx >= len(self.icons):
+            idx = len(self.icons) - 1
+        if idx < 0:
+            idx = 0
         self.activeIcon = self.icons[idx]
 
-        self.init() # Redraw
+        # Redraw only the two relevant icons
+        self.icon_callbacks[curr]()
+        self.icon_callbacks[idx]()
         self.refresh()
         
         time.sleep(BUSY_DELAY)
         self.busy = False
+
+    # ------------------------------------------------------
 
     def _icon_print(self):
         if self.activeIcon == "print":
