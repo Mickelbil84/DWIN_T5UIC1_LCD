@@ -5,6 +5,8 @@ from DWIN_Screen import T5UIC1_LCD
 
 LCD_COM_Port = '/dev/ttyAML6'
 
+FPS = 30
+
 if __name__ == "__main__":
     lcd = T5UIC1_LCD(LCD_COM_Port)
 
@@ -27,4 +29,4 @@ if __name__ == "__main__":
             if icon_id > 91:
                 icon_id = 0
 
-        time.sleep(1 / 60)
+        time.sleep(1 / FPS)
